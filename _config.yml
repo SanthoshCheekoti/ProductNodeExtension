@@ -1,9 +1,11 @@
-
-language: en
 theme: jekyll-theme-cayman
+
 kramdown:
   input: GFM
+  hard_wrap: false
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     block:
       line_numbers: true
+      span:
+        line_numbers: false

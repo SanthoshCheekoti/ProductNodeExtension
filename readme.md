@@ -17,6 +17,10 @@ layout: default
     width: 100% !important;
     padding: 5rem 2.5% !important;
   }
+
+  .site-footer {
+    display: none !important;
+  }
 </style>
 
 # Introduction

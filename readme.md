@@ -6,9 +6,9 @@ layout: default
   /* This targets the Cayman theme specifically */
   .main-content {
     max-width: 95% !important;
-    width: 95% !important;
+    width: 98% !important;
     margin: 0 auto !important;
-    padding: 2rem 2.5% !important;
+    padding: 5rem 2.5% !important;
   }
   
   /* Forces the header to be wide too */

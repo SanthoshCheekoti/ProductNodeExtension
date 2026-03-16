@@ -43,7 +43,7 @@ layout: default
   </div>
 </div>
 
-# Introduction
+
 # [CMP Node Extension Guide](extendcmp.md)
-# Prerequisites
+
     

@@ -1,4 +1,4 @@
-theme: jekyll-theme-architect
+theme: jekyll-theme-jekyll-theme-minimal
 
 kramdown:
   input: GFM

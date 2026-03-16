@@ -196,4 +196,5 @@ define table yequip {
 
     ENDCLASS.
 ```
-***The BADI `CMD_PRODUCT_SEGMENTS_EXT` has to be implemented in order to save the data in node extension DB table. The steps to implement this BADI is not in scope**.
+
+ ### ***The BADI `CMD_PRODUCT_SEGMENTS_EXT` has to be implemented in order to save the data in node extension DB table. The steps to implement this BADI is not in scope**.

@@ -1,0 +1,5 @@
+title: SAP MDG Cloud-Ready Mode, Node Extension for Product Master Data
+description: This repository contains the code for the SAP MDG Cloud-Ready Mode, Node Extension for Product Master Data. It provides a sample implementation of a node extension for product master data in the SAP Master Data Governance (MDG) Cloud-Ready Mode.
+author: Santhosh Cheekoti, SAP SE 
+language: en
+theme: jekyll-theme-slate

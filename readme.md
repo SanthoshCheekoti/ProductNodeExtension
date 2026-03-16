@@ -3,47 +3,43 @@ layout: default
 ---
 
 <style>
-  /* Hide default theme elements */
-  .page-header, .site-footer { display: none !important; }
+  /* 1. HIDE ALL DEFAULT THEME WRAPPERS */
+  .page-header, 
+  .site-footer, 
+  footer,
+  .site-footer-owner, 
+  .site-footer-credits { 
+    display: none !important; 
+    visibility: hidden !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
 
-  /* Page layout */
+  /* 2. PAGE WIDTH & LAYOUT */
   .main-content {
     max-width: 98% !important;
     width: 98% !important;
     margin: 0 auto !important;
-    padding: 1rem 5% !important;
+    padding: 2rem 4% !important;
+    border: none !important;
   }
 
-  /* Custom Minimal Header */
+  /* 3. NAVIGATION BAR */
   .custom-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
     margin-bottom: 30px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   }
-
-  .nav-links a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #0366d6;
-    font-weight: 500;
-  }
-
-  .nav-links a:hover { text-decoration: underline; }
-  
-  .brand { font-weight: bold; font-size: 1.2rem; color: #24292e; }
 </style>
 
 <div class="custom-nav">
-  <div class="brand">📦 Product Node Extension</div>
-  <div class="nav-links">
-    <a href="#introduction">Introduction</a>
-    <a href="#1-create-the-data-dictionary-table">DDIC</a>
-    <a href="#4-business-logic-implementation">ABAP Logic</a>
-    <a href="https://github.com/SanthoshCheekoti/ProductNodeExtension">View Source</a>
+  <div style="font-weight: bold; font-size: 1.2rem;">Product Node Extension</div>
+  <div>
+    <a href="https://github.com/SanthoshCheekoti/ProductNodeExtension" style="text-decoration: none; color: #0366d6;">View GitHub Repo</a>
   </div>
 </div>
 

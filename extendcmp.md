@@ -1,3 +1,11 @@
+<style>
+  .main-content, .container, .wrapper {
+    max-width: 95% !important;
+    width: 95% !important;
+    margin: 0 auto !important;
+  }
+</style>
+
 # Introduction
 
 The **persistence layer** in *Cloud‑Ready Mode* is based on the **Consolidation and Mass Processing (CMP) framework**. In practical terms, this means that once the [save sequence](https://help.sap.com/docs/abap-cloud/abap-rap/rap-transactional-model-and-sap-luw) is executed, the draft data is persisted into the **CMP process tables**.

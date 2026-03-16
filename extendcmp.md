@@ -82,7 +82,9 @@ define table yequip {
       <img src="images/image8.png" alt="Logo" width="900">
 
 ## Create(if not existing already) sub-class `ZCL_MDC_MODEL_MAT` for class `CL_MDC_MODE_MAT`. 
+
 ### Class: `ZCL_MDC_MODEL_MAT`
+
 | Method | Type | Description |
 | :--- | :--- | :--- |
 | `MAP_EXTENSIONS_2API` | Protected Instance | Maps the data from PRC table format to unified material API format |

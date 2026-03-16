@@ -54,15 +54,15 @@ define table yequip {
     3. Select `Tables` in the Dialog Structure view   
 
     4. Click on `New Entries` and the details as shown below
-       <img src="images/Image2.png" alt="Logo" width="900">
+       <img src="images/image2.png" alt="Logo" width="900">
 
     5. Select the root table `MARA` and `Joins` in dialog structure view and maintain the details as shown below
-       <img src="images/Image3.png" alt="Logo" width="900">
+       <img src="images/image3.png" alt="Logo" width="900">
 
     6. Select the newly created entry table `YEQUIP` and click on `Join Fields` and values as shown below
-       <img src="images/Image4.png" alt="Logo" width="900">
+       <img src="images/image4.png" alt="Logo" width="900">
     7. Select `Tables` in dialog structure, select `YEQUIP` table, select `Table Fields` in the dialog structure and click on `Synchronize Fields`
-       <img src="images/Image5.png" alt="Logo" width="900">
+       <img src="images/image5.png" alt="Logo" width="900">
     8. Click on `Save` button
 
 3. Generate Resultant Artifacts.
@@ -72,14 +72,14 @@ define table yequip {
    1. Go to transaction `MDGIMG->Cloud-Ready Mode in SAP MDG->Configure Process Models and Field Properties->Configure Process Models`
 
    2. Click on `Business Object Type` on the dialog structure, select BO Type `194` and click on `Resultant Artifacts`
-      <img src="images/Image6.png" alt="Logo" width="900">
+      <img src="images/image6.png" alt="Logo" width="900">
 
    3. Enter a value in `Package` field, and click on `Apply missing`, after processing is completed, system will show the generated artifacts, as shown below
-      <img src="images/Image7.png" alt="Logo" width="900">
+      <img src="images/image7.png" alt="Logo" width="900">
 
    4. Click on the `Reset Cache` button
      
-      <img src="images/Image8.png" alt="Logo" width="900">
+      <img src="images/image8.png" alt="Logo" width="900">
 
 ## Create(if not existing already) sub-class `ZCL_MDC_MODEL_MAT` for class `CL_MDC_MODE_MAT`. 
 ### Class: `ZCL_MDC_MODEL_MAT`

@@ -1,8 +1,6 @@
-
-
 # Introduction
 
-The **persistence layer** in *Cloud‑Ready Mode* is based on the **Consolidation and Mass Processing (CMP) framework**. In practical terms, this means that once the [save sequence](https://help.sap.com/docs/abap-cloud/abap-rap/rap-transactional-model-and-sap-luw) is executed, the draft data is persisted into the **CMP process tables**.
+The **persistence layer** in _Cloud‑Ready Mode_ is based on the **Consolidation and Mass Processing (CMP) framework**. In practical terms, this means that once the [save sequence](https://help.sap.com/docs/abap-cloud/abap-rap/rap-transactional-model-and-sap-luw) is executed, the draft data is persisted into the **CMP process tables**.
 
 Therefore, to support Node extension, it is essential to **extend the CMP data model with a custom node**.
 
@@ -18,13 +16,13 @@ Create a database table named **YEQUIP** using the information provided below.
 
 #### Table Information
 
-| Field Name | Key | Data Type | Length | Description |
-|----------|-----|-----------|--------|-------------|
-| **MATNR** | Yes | CHAR | 40 | Material Number |
-| **YYEQUNR** | Yes | CHAR | 18 | Equipment Number |
-| YYBAUJJ | No | CHAR | 04 | Fiscal year (text) |
-| YYBAUMM | No | CHAR | 02 | Month of construction |
-| YYHERLD | No | CHAR | 03 | Country key |
+| Field Name  | Key | Data Type | Length | Description           |
+| ----------- | --- | --------- | ------ | --------------------- |
+| **MATNR**   | Yes | CHAR      | 40     | Material Number       |
+| **YYEQUNR** | Yes | CHAR      | 18     | Equipment Number      |
+| YYBAUJJ     | No  | CHAR      | 04     | Fiscal year (text)    |
+| YYBAUMM     | No  | CHAR      | 02     | Month of construction |
+| YYHERLD     | No  | CHAR      | 03     | Country key           |
 
 #### Table Definition (ABAP)
 
@@ -46,29 +44,28 @@ define table yequip {
 ```
 
 2. Add the table **YEQUIP** to the CMP data model
-    1. Go to transaction `MDGIMG->Cloud-Ready Mode in SAP MDG->Configure Process Models and Field Properties->Configure Process Models`
+   1. Go to transaction `MDGIMG->Cloud-Ready Mode in SAP MDG->Configure Process Models and Field Properties->Configure Process Models`
 
-    2. In the dialog Structure section click on the `Business Object Type` and select `194(Product)`
-       <img src="images/Image1.png" alt="Logo" width="900">
+   2. In the dialog Structure section click on the `Business Object Type` and select `194(Product)`
+      <img src="images/Image1.png" alt="Logo" width="900">
 
-    3. Select `Tables` in the Dialog Structure view   
+   3. Select `Tables` in the Dialog Structure view
 
-    4. Click on `New Entries` and the details as shown below
-       <img src="images/image2.png" alt="Logo" width="900">
+   4. Click on `New Entries` and the details as shown below
+      <img src="images/image2.png" alt="Logo" width="900">
 
-    5. Select the root table `MARA` and `Joins` in dialog structure view and maintain the details as shown below
-       <img src="images/image3.png" alt="Logo" width="900">
+   5. Select the root table `MARA` and `Joins` in dialog structure view and maintain the details as shown below
+      <img src="images/image3.png" alt="Logo" width="900">
 
-    6. Select the newly created entry table `YEQUIP` and click on `Join Fields` and values as shown below
-       <img src="images/image4.png" alt="Logo" width="900">
-    7. Select `Tables` in dialog structure, select `YEQUIP` table, select `Table Fields` in the dialog structure and click on `Synchronize Fields`
-       <img src="images/image5.png" alt="Logo" width="900">
-    8. Click on `Save` button
+   6. Select the newly created entry table `YEQUIP` and click on `Join Fields` and values as shown below
+      <img src="images/image4.png" alt="Logo" width="900">
+   7. Select `Tables` in dialog structure, select `YEQUIP` table, select `Table Fields` in the dialog structure and click on `Synchronize Fields`
+      <img src="images/image5.png" alt="Logo" width="900">
+   8. Click on `Save` button
 
 3. Generate Resultant Artifacts.
 
    This step is required all the artifacts like process tables. This artifacts will be used by the framework during the runtime.
-
    1. Go to transaction `MDGIMG->Cloud-Ready Mode in SAP MDG->Configure Process Models and Field Properties->Configure Process Models`
 
    2. Click on `Business Object Type` on the dialog structure, select BO Type `194` and click on `Resultant Artifacts`
@@ -78,21 +75,21 @@ define table yequip {
       <img src="images/image7.png" alt="Logo" width="900">
 
    4. Click on the `Reset Cache` button
-     
+
       <img src="images/image8.png" alt="Logo" width="900">
 
-## Create(if not existing already) sub-class `ZCL_MDC_MODEL_MAT` for class `CL_MDC_MODE_MAT`. 
+## Create(if not existing already) sub-class `ZCL_MDC_MODEL_MAT` for class `CL_MDC_MODE_MAT`.
 
 ### Class: `ZCL_MDC_MODEL_MAT`
 
-| Method | Type | Description |
-| :--- | :--- | :--- |
-| `MAP_EXTENSIONS_2API` | Protected Instance | Maps the data from PRC table format to unified material API format |
-| `CALL_API_EXTENSION_PREPARE` | Protected Instance | Map to Unified API format |
+| Method                       | Type               | Description                                                        |
+| :--------------------------- | :----------------- | :----------------------------------------------------------------- |
+| `MAP_EXTENSIONS_2API`        | Protected Instance | Maps the data from PRC table format to unified material API format |
+| `CALL_API_EXTENSION_PREPARE` | Protected Instance | Map to Unified API format                                          |
 
 > ⚠️ **Caution:** The following code is for illustrative purpose only.
-```
 
+```abap
     CLASS zcl_mdc_model_mat DEFINITION
     PUBLIC
     INHERITING FROM cl_mdc_model_mat
@@ -116,14 +113,8 @@ define table yequip {
         CONSTANTS mv_equiptable TYPE tabname VALUE 'YEQUIP'.
         DATA deleted_records TYPE REF TO zmdc_tt_zyequip_prc.
         METHODS get_deleted_records.
-        
     ENDCLASS.
-
-
-
     CLASS zcl_mdc_model_mat IMPLEMENTATION.
-
-
     METHOD map_extensions_2api.
 
         IF NOT me->sorted EQ abap_true.
@@ -149,10 +140,8 @@ define table yequip {
                                                                                 countrykey          = <ls_delete>-yyherld
                                                                                 delete_row          = abap_true
                                             ) ).
-        ENDLOOP..
-
+        ENDLOOP.
     ENDMETHOD.
-
     METHOD get_deleted_records.
         TRY.
             DATA(model) = cl_mdc_model=>new( iv_process_id = me->process_id iv_bo_type = me->bo_type ). "no step number
@@ -192,16 +181,12 @@ define table yequip {
 
         cs_mat_data-zzequip_ext_t_x = VALUE #( BASE cs_mat_data-zzequip_ext_t_x FOR wa IN is_mat_data-zzequip_ext_t_x ( CORRESPONDING #( wa MAPPING matnr = DEFAULT iv_matnr ) ) ).
     ENDMETHOD.
-
-
-    
-
     ENDCLASS.
 ```
 
 ### Implementation of BAdI CMD_PRODUCT_SEGMENTS_EXT
 
-The BAdI **CMD_PRODUCT_SEGMENTS_EXT** must be implemented to save data into the node extension database table. 
+The BAdI **CMD_PRODUCT_SEGMENTS_EXT** must be implemented to save data into the node extension database table.
 
 > [!IMPORTANT]
 > The specific steps to implement this BAdI are currently out of scope for this documentation.

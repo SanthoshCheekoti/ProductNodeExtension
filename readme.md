@@ -19,7 +19,6 @@ layout: default
   }
 </style>
 
-# Your README Content Starts Here...
 # Introduction
 # [CMP Node Extension Guide](extendcmp.md)
 # Prerequisites

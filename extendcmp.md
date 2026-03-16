@@ -88,7 +88,7 @@ define table yequip {
 | Method | Type | Description |
 | :--- | :--- | :--- |
 | `MAP_EXTENSIONS_2API` | Protected Instance | Maps the data from PRC table format to unified material API format |
-| `CALL_API_EXTENSION_PREPARE` | Protected Instance | Map to Unifed API forma |
+| `CALL_API_EXTENSION_PREPARE` | Protected Instance | Map to Unified API format |
 
 > ⚠️ **Caution:** The following code is for illustrative purpose only.
 ```

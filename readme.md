@@ -21,7 +21,7 @@ layout: default
     max-width: 98% !important;
     width: 98% !important;
     margin: 0 auto !important;
-    padding: 2rem 4% !important;
+    padding: 2rem 2% !important;
     border: none !important;
   }
 

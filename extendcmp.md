@@ -89,6 +89,7 @@ define table yequip {
 
 > ⚠️ **Caution:** The following code is for illustrative purpose only.
 
+{: .line-numbers}
 ```abap
     CLASS zcl_mdc_model_mat DEFINITION
     PUBLIC

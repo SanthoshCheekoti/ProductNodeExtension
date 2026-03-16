@@ -1,10 +1,4 @@
-<style>
-  .main-content, .container, .wrapper {
-    max-width: 95% !important;
-    width: 95% !important;
-    margin: 0 auto !important;
-  }
-</style>
+
 
 # Introduction
 

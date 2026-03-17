@@ -1,4 +1,4 @@
-# Introduction
+# Extending CMP Data Model with custom node
 
 The **persistence layer** in _Cloud‑Ready Mode_ is based on the **Consolidation and Mass Processing (CMP) framework**. In practical terms, this means that once the [save sequence](https://help.sap.com/docs/abap-cloud/abap-rap/rap-transactional-model-and-sap-luw) is executed, the draft data is persisted into the **CMP process tables**.
 

@@ -194,5 +194,4 @@ define table yequip {
 
 The BAdI **CMD_PRODUCT_SEGMENTS_EXT** must be implemented to save data into the node extension database table.
 
-> [!IMPORTANT]
-> The specific steps to implement this BAdI are currently out of scope for this documentation.
+> ⚠️ **Important:** The specific steps to implement this BAdI are currently out of scope for this documentation.

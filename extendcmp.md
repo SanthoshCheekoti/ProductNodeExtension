@@ -94,8 +94,6 @@ define table yequip {
 
 > ⚠️ **Caution:** The following code is for illustrative purpose only.
 
-<div class="wide-code-block">
-
 {: .line-numbers}
 ```abap
     CLASS zcl_mdc_model_mat DEFINITION
@@ -191,8 +189,6 @@ define table yequip {
     ENDMETHOD.
     ENDCLASS.
 ```
-
-</div>
 
 ### Implementation of BAdI CMD_PRODUCT_SEGMENTS_EXT
 

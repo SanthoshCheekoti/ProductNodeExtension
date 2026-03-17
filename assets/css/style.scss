@@ -9,8 +9,8 @@
 }
 
 @media screen and (min-width: 64em) {
-  .main-content .wide-code-block .highlighter-rouge,
-  .main-content .wide-code-block pre.highlight {
+  .main-content div.highlighter-rouge,
+  .main-content pre.highlight {
     margin-left: -1rem;
     margin-right: -1rem;
   }

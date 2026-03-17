@@ -28,3 +28,11 @@ a.btn.btn-primary {
     margin-right: -1rem;
   }
 }
+.page-header {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url("../../images/mainImage.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

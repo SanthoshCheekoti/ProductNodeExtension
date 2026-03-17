@@ -8,10 +8,16 @@
   display: none !important;
 }
 
-/* Hide View on GitHub button */
+/* Hide View on GitHub button and related links */
 .github-link,
 a.btn,
-.page-header .btn {
+.page-header .btn,
+.page-header a[href*="github.com"],
+.header-nav-link {
+  display: none !important;
+}
+
+a.btn.btn-primary {
   display: none !important;
 }
 

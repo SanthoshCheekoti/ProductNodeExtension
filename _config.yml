@@ -2,6 +2,8 @@
 language: en
 title: "MDG Cloud-Ready Mode - Node extension for Product"
 theme: jekyll-theme-cayman
+show_downloads: false
+github_url: ''
 kramdown:
   input: GFM
   syntax_highlighter: rouge

@@ -13,6 +13,22 @@ This document describes the **end‑to‑end steps** required to implement a **n
 
 ---
 
+## Quick Navigation
+
+- [Prerequisites](#prerequisites)
+- [Step 1: Create the Database Table](#step-1-create-the-database-table)
+- [Step 2: Add the Table to the CMP Data Model](#step-2-add-the-table-to-the-cmp-data-model)
+- [Step 3: Generate Resultant Artifacts](#step-3-generate-resultant-artifacts)
+- [Create or Extend ZCL_MDC_MODEL_MAT](#create-or-extend-zcl_mdc_model_mat)
+- [Implementation of BAdI CMD_PRODUCT_SEGMENTS_EXT](#implementation-of-badi-cmd_product_segments_ext)
+
+## Prerequisites
+
+- Access to SAP MDG IMG configuration for Cloud-Ready Mode
+- Authorization to maintain process models and generate resultant artifacts
+- A package available for artifact generation
+- Existing product process model (`Business Object Type 194`)
+
 ## Create the Data Dictionary Table Representing the Node Extension
 
 ### Step 1: Create the Database Table
@@ -48,42 +64,55 @@ define table yequip {
 }
 ```
 
-2. Add the table **YEQUIP** to the CMP data model
+### Step 2: Add the Table to the CMP Data Model
+
+1. Add the table **YEQUIP** to the CMP data model
    1. Go to transaction `MDGIMG->Cloud-Ready Mode in SAP MDG->Configure Process Models and Field Properties->Configure Process Models`
 
    2. In the dialog Structure section click on the `Business Object Type` and select `194(Product)`
       <img src="images/Image1.png" alt="Logo" width="900">
+        Figure 1: Select Business Object Type `194 (Product)`.
 
    3. Select `Tables` in the Dialog Structure view
 
    4. Click on `New Entries` and the details as shown below
       <img src="images/image2.png" alt="Logo" width="900">
+        Figure 2: Create a new table entry for `YEQUIP`.
 
    5. Select the root table `MARA` and `Joins` in dialog structure view and maintain the details as shown below
       <img src="images/image3.png" alt="Logo" width="900">
+        Figure 3: Maintain join settings for root table `MARA`.
 
    6. Select the newly created entry table `YEQUIP` and click on `Join Fields` and values as shown below
       <img src="images/image4.png" alt="Logo" width="900">
+        Figure 4: Maintain join fields for `YEQUIP`.
+
    7. Select `Tables` in dialog structure, select `YEQUIP` table, select `Table Fields` in the dialog structure and click on `Synchronize Fields`
       <img src="images/image5.png" alt="Logo" width="900">
+        Figure 5: Synchronize table fields.
+
    8. Click on `Save` button
 
-3. Generate Resultant Artifacts.
+### Step 3: Generate Resultant Artifacts
 
    This step is required all the artifacts like process tables. This artifacts will be used by the framework during the runtime.
+
    1. Go to transaction `MDGIMG->Cloud-Ready Mode in SAP MDG->Configure Process Models and Field Properties->Configure Process Models`
 
    2. Click on `Business Object Type` on the dialog structure, select BO Type `194` and click on `Resultant Artifacts`
       <img src="images/image6.png" alt="Logo" width="900">
+        Figure 6: Open Resultant Artifacts for BO Type `194`.
 
    3. Enter a value in `Package` field, and click on `Apply missing`, after processing is completed, system will show the generated artifacts, as shown below
       <img src="images/image7.png" alt="Logo" width="900">
+        Figure 7: Apply missing artifacts and review generated output.
 
    4. Click on the `Reset Cache` button
 
       <img src="images/image8.png" alt="Logo" width="900">
+        Figure 8: Reset cache after generation.
 
-## Create(if not existing already) sub-class `ZCL_MDC_MODEL_MAT` for class `CL_MDC_MODE_MAT`.
+## Create or Extend ZCL_MDC_MODEL_MAT
 
 ### Class: `ZCL_MDC_MODEL_MAT`
 

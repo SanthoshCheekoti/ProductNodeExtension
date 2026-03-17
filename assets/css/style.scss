@@ -9,7 +9,9 @@
 }
 
 /* Hide View on GitHub button */
-.github-link {
+.github-link,
+a.btn,
+.page-header .btn {
   display: none !important;
 }
 

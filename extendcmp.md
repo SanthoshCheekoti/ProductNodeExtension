@@ -1,5 +1,4 @@
-layout: page
-title: "Extend CMP Data Model with custom node"
+
 
 # Introduction
 

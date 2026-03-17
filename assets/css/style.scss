@@ -8,6 +8,11 @@
   display: none !important;
 }
 
+/* Hide View on GitHub button */
+.github-link {
+  display: none !important;
+}
+
 @media screen and (min-width: 64em) {
   .main-content div.highlighter-rouge,
   .main-content pre.highlight {

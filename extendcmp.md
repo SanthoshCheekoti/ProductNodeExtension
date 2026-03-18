@@ -105,6 +105,7 @@ define table yequip {
 
    3. Enter a value in `Package` field, and click on `Apply missing`, after processing is completed, system will show the generated artifacts, as shown below
       <img src="images/image7.png" alt="Logo" width="900">
+        <a id="cmp-resultant-artifacts"></a>
         Figure 7: Apply missing artifacts and review generated output.
 
    4. Click on the `Reset Cache` button

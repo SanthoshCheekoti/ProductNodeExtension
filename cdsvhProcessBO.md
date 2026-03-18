@@ -35,3 +35,17 @@ define view entity ZI_ProductEquipmentAddnlProc
       _Product
 }
 ```
+### <a id="ProcessBO-BIF-DCL"></a>Basic Interface View DCL
+```abap
+@EndUserText.label: 'Access: ZI_ProductEquipmentAddnlProc'
+@MappingRole: true
+define role ZI_PRODUCTEQUIPMENTADDNLPROC {
+  grant
+    select
+      on
+        ZI_PRODUCTEQUIPMENTADDNLPROC
+          where
+            inheriting conditions from entity I_ProductProc replacing { root with _Product };
+            
+}
+```

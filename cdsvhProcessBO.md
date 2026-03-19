@@ -397,3 +397,135 @@ define role ZC_PRODUCTEQUIPMENTDATAPROC_TP {
             
 }
 ```
+### <a id="ProcessBO-CV-nodeextension-inactive-MDE"></a>Metadata Extension for Inactive data consumption view
+```abap
+@Metadata.layer: #CUSTOMER
+annotate view ZC_PRODUCTEQUIPMENTDATAPROC_TP with
+{
+  @UI: {
+    lineItem: [ {
+      importance: #HIGH,
+      position: 20
+    } ]
+  }
+  Product;
+  @UI: {
+    lineItem: [ {
+      importance: #HIGH,
+      position: 30
+    } ]
+  }
+  @Consumption.valueHelpDefinition: [ {
+  entity: {
+    name: 'ZI_EquipmentView',
+    element: 'Equnr'
+  },
+  distinctValues: true
+  } ]
+  @Consumption: {
+  filter: {
+   multipleSelections: true,
+   selectionType: #SINGLE
+  }
+  }
+  EquipmentNumber;
+
+
+  @UI.hidden: true
+  EquipmentText;
+  @UI: {
+       lineItem: [
+         { semanticObjectAction: 'govern',semanticObject: 'Product', type: #WITH_INTENT_BASED_NAVIGATION, position: 1, importance: #HIGH, label:'Record Identification'  },
+         { dataAction: 'SaveMassEditProdEquipmentData', type: #FOR_ACTION, label: 'Mass Edit' }
+       ]
+     }
+  @Consumption.filter.hidden: true
+  RecordIdentificationText;
+
+  @Consumption: {
+    valueHelpDefinition: [
+      { entity: {name: 'C_Countryvhtemp', element: 'Country' } }
+    ]
+  }
+  @UI: {
+  lineItem: [ {
+  importance: #HIGH,
+  position: 55
+  } ]
+  }
+  CountryKey;
+  @UI: {
+  lineItem: [ {
+  importance: #HIGH,
+  position: 65
+  } ]
+  }
+  FiscalYearAsText;
+  @UI: {
+  lineItem: [ {
+  importance: #HIGH,
+  position: 75
+  } ]
+  }
+  MonthOfConstruction;
+  /************************************** Begin of Step Status Fields Annotations*****************************************************/
+  @UI.textArrangement:#TEXT_FIRST
+  @EndUserText.label: 'Row Type'
+  @Consumption.valueHelpDefinition: [{ entity: {name: 'I_MDChangeProcessKPIRowVH', element: 'MDChgProcKPIUpdateStatus' } }]
+  @Consumption: {
+    filter: {
+      multipleSelections: true,
+      selectionType: #SINGLE
+    }
+  }
+  MDChgProcKPIUpdateStatus;
+  @EndUserText.label: 'Changes'
+  @UI.lineItem: [{ importance: #HIGH, position: 80 }]
+  MDChgProcModifdObjectsCount;
+  @UI.hidden: true
+  MDChgProcKPIRecordTypeText;
+  @UI.hidden: true
+  MDChgProcKPIRecordStatusText;
+  @UI.hidden: true
+  MDChgProcKPIUpdateStatusText;
+  @Consumption.valueHelpDefinition: [{ entity: {name: 'I_MDChgProcKPILogClassVH', element: 'MDChangeProcKPIValueKey' } }]
+  MDChangeProcessMessageType;
+  @Consumption.valueHelpDefinition: [{ entity: {name: 'I_MDChgProcKPIFltrActvtnStsVH', element: 'MDChgProcessActivationTarget' } }]
+  MDChgProcessActivationTarget;
+  @Consumption.valueHelpDefinition: [{ entity: {name: 'I_MDChgProcKPIFltrRplctnVH', element: 'MDChgProcessReplicationStatus' } }]
+  MDChgProcessReplicationStatus;
+  @UI.hidden: true
+  MDChgProcReplicationStatusText;
+  /* Hide fields */
+  @Consumption.filter.hidden: true
+  @EndUserText: {
+    label: 'Process ID',
+    quickInfo: 'Process ID'
+  }
+  @UI.hidden: true
+  MasterDataChangeProcess;
+  @Consumption.filter.hidden: true
+  @UI.hidden: true
+  MDChgProcessStep;
+
+  @Consumption.filter.hidden: true
+  @UI.hidden: true
+  MDChgProcessSrceObject;
+
+  @Consumption.filter.hidden: true
+  @UI.hidden: true
+  MDChgProcessSourceModifBinary;
+
+  @Consumption.filter.hidden: true
+  @UI.hidden: true
+  MDChgProcessSourceModified;
+
+  @Consumption.filter.hidden: true
+  @UI.hidden: true
+  MDChgProcSrceLastChgdDateTime;
+
+  @Consumption.filter.hidden: true
+  @UI.hidden: true
+  MDChgProcessSrceSystem;
+}
+```

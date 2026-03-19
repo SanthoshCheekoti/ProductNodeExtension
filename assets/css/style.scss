@@ -38,3 +38,39 @@ a.btn.btn-primary {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* Copy button styles for code blocks */
+.code-block-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 12px;
+  background-color: #1f6feb;
+  color: #fff;
+  border: 1px solid #0969da;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.copy-button:hover {
+  background-color: #0969da;
+  border-color: #0860ca;
+}
+
+.copy-button.copied {
+  background-color: #238636;
+  border-color: #1f6e34;
+}
+
+.copy-button:active {
+  transform: scale(0.98);
+}

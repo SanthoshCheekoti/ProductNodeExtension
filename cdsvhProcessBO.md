@@ -219,3 +219,181 @@ define role ZI_PRODUCTEQUIPMENTDATAPROC_TP {
 
 }
 ```
+### <a id="ProcessBO-CV-nodeextension"></a>Consumption view for Modification data
+```abap
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Consumption view for Prod Equip Changes'
+@Metadata.ignorePropagatedAnnotations: true
+define view entity ZC_PRODUCTEQUIPMENTPROCCHANGE
+  as select from ZI_ProductEquipmentProcChange
+{
+  key MasterDataChangeProcess,
+  key MDChgProcessStep,
+  key MDChgProcessSrceSystem,
+  key MDChgProcessSrceObject,
+  key EquipmentNumber,
+  key MDChgProcessModelTableName,
+  key MDChangeProcessModelFieldName,
+      MDChangeProcModelTableDesc,
+      @ObjectModel: {
+       readOnly: true,
+       virtualElement: true,
+       virtualElementCalculatedBy: 'ABAP:CL_MDC_PRODPROCTP_CALC_EXIT'
+      }
+      MDChangeProcessModelFieldDesc,
+      @Consumption.hidden: true
+      concat(
+        concat(MDChgProcessSrceSystem,
+          concat( '%%', MDChgProcessSrceObject)
+        ),
+        concat( '%%', EquipmentNumber )
+      )                                        as MDChgProcessRecordObjectID,
+      MDChgProcessSourceModified,
+      @ObjectModel: {
+        readOnly: true,
+        virtualElement: true,
+        virtualElementCalculatedBy: 'ABAP:CL_MDC_PRODPROCTP_CALC_EXIT'
+      }
+      cast( '' as abap.char( 30 ) )            as MDChgProcessSourceModifiedText,
+      @Consumption.hidden: true
+      MDChgProcModelNodeExternalName,
+      @Consumption.hidden: true
+      MDChgProcModTableExternalName,
+      @ObjectModel: {
+        readOnly: true,
+        virtualElement: true,
+        virtualElementCalculatedBy: 'ABAP:CL_MDC_PRODPROCTP_CALC_EXIT'
+      }
+      cast('' as abap_boolean preserving type) as MDChgProcessAttributeIsChanged,
+      @ObjectModel: {
+        readOnly: true,
+        virtualElement: true,
+        virtualElementCalculatedBy: 'ABAP:CL_MDC_PRODPROCTP_CALC_EXIT'
+      }
+      cast( '' as fieldname )                  as MDChgProcModFieldExternalName,
+      @ObjectModel: {
+        readOnly: true,
+        virtualElement: true,
+        virtualElementCalculatedBy: 'ABAP:CL_MDC_PRODPROCTP_CALC_EXIT'
+      }
+      cast( '' as abap.char( 260 ) )           as MDChgProcCurrentAttributeValue,
+      @ObjectModel: {
+        readOnly: true,
+        virtualElement: true,
+        virtualElementCalculatedBy: 'ABAP:CL_MDC_PRODPROCTP_CALC_EXIT'
+      }
+      cast( '' as abap.char( 260 ) )           as MDChgProcPrevAttributeValue,
+      MDChgProcessRecordObjectText,
+      /* Associations */
+
+      _Product,
+      @UI.hidden: true
+      @Consumption: {
+        hidden: true,
+        filter.hidden: true
+      }
+      _ProductEquipmentData
+}
+```
+### <a id="ProcessBO-CV-nodeextension-inactive"></a>Consumption view for Inactive data
+```abap
+@AccessControl.authorizationCheck: #MANDATORY
+@EndUserText.label: 'Consumption view for Process Prod Equip'
+@ObjectModel: {
+  usageType: {
+    serviceQuality: #C,
+    sizeCategory: #XXL,
+    dataClass: #TRANSACTIONAL
+  }
+}
+@VDM.viewType: #CONSUMPTION
+@Metadata.allowExtensions: true
+
+define view entity ZC_PRODUCTEQUIPMENTDATAPROC_TP
+  as projection on ZI_ProductEquipmentDataProc_TP
+  association of one       to many C_MDCHGPROCRECORDMESSAGE      as _RecordMessages on  $projection.MasterDataChangeProcess = _RecordMessages.MasterDataChangeProcess
+                                                                                    and $projection.MDChgProcessStep        = _RecordMessages.MDChgProcessStep
+                                                                                    and $projection.MDChgProcessSrceSystem  = _RecordMessages.MDChgProcessSrceSystem
+                                                                                    and $projection.MDChgProcessSrceObject  = _RecordMessages.MDChgProcessSrceObject
+  association of exact one to many ZC_PRODUCTEQUIPMENTPROCCHANGE as _Changes        on  $projection.MasterDataChangeProcess = _Changes.MasterDataChangeProcess
+                                                                                    and $projection.MDChgProcessStep        = _Changes.MDChgProcessStep
+                                                                                    and $projection.MDChgProcessSrceSystem  = _Changes.MDChgProcessSrceSystem
+                                                                                    and $projection.MDChgProcessSrceObject  = _Changes.MDChgProcessSrceObject
+                                                                                    and $projection.EquipmentNumber         = _Changes.EquipmentNumber
+                                                                                    and _Changes.MDChgProcessSourceModified = 'X'
+{
+  key     MasterDataChangeProcess,
+  key     MDChgProcessStep,
+  key     MDChgProcessSrceSystem,
+  key     MDChgProcessSrceObject,
+          @ObjectModel.text.element: ['EquipmentText']
+  key     EquipmentNumber,
+          _EquipmentText.eqktx                                                as EquipmentText,
+          FiscalYearAsText,
+          MonthOfConstruction,
+          CountryKey,
+          MDChgProcSrceLastChgdDateTime,
+          MDChgProcessSourceModified,
+          MDChgProcessSourceModifBinary,
+          _Product._ProductDescription.ProductDescription : localized,
+          @ObjectModel.text.element: ['ProductDescription']
+          _Product.Product                                                    as RecordIdentificationText,
+          @Semantics.text: true
+          _UpdateStatusVH.MDChangeProcKPIValueKeyDesc                         as MDChgProcKPIUpdateStatusText,
+          @ObjectModel.text.element: ['MDChgProcKPIUpdateStatusText']
+          _UpdateStatusVH.MDChgProcKPIUpdateStatus,
+          @Semantics.text: true
+          _Product._RecordType._KPIRecordTypeText.MDChangeProcKPIValueKeyDesc as MDChgProcKPIRecordTypeText,
+          @ObjectModel.text.element: ['MDChgProcKPIRecordTypeText']
+          _Product._RecordType.MDChgProcKPIRecordType,
+          @Semantics.text: true
+          _Product._KPIRecordStatusText.MDChangeProcKPIValueKeyDesc           as MDChgProcKPIRecordStatusText,
+          @ObjectModel.text.element: ['MDChgProcKPIRecordStatusText']
+          _Product.MDChgProcessValidationStatus,
+          @ObjectModel.virtualElementCalculatedBy: 'ABAP:CL_MDC_PRODPROCTP_CALC_EXIT'
+  virtual MDChgProcModifdObjectsCount  : abap.sstring( 260 ),
+          @EndUserText.label: 'Message Type'
+          @ObjectModel.virtualElementCalculatedBy: 'ABAP:CL_MDC_PRODPROCTP_CALC_EXIT'
+          @ObjectModel.filter.transformedBy: 'ABAP:CL_MDC_PRODPROCTP_FILTER_EXIT'
+  virtual MDChangeProcessMessageType   : symsgty,
+          @EndUserText.label: 'Log Message Class'
+          @ObjectModel.virtualElementCalculatedBy: 'ABAP:CL_MDC_PRODPROCTP_CALC_EXIT'
+          @ObjectModel.filter.transformedBy: 'ABAP:CL_MDC_PRODPROCTP_FILTER_EXIT'
+  virtual MDChangeProcessMessageID     : msgid,
+          @EndUserText.label: 'Log Message Number'
+          @ObjectModel.virtualElementCalculatedBy: 'ABAP:CL_MDC_PRODPROCTP_CALC_EXIT'
+          @ObjectModel.filter.transformedBy: 'ABAP:CL_MDC_PRODPROCTP_FILTER_EXIT'
+  virtual MDChangeProcessMessageNumber : msgno,
+          @EndUserText.label: 'Activation Result'
+          @ObjectModel.text.element: ['MDChgProcKPIRecordTargetText']
+          @ObjectModel.filter.transformedBy: 'ABAP:CL_MDC_PRODPROCTP_FILTER_EXIT'
+          _Product.MDChgProcessActivationTarget,
+          @Semantics.text: true
+          _Product._RecordTargetText.MDChangeProcKPIValueKeyDesc              as MDChgProcKPIRecordTargetText,
+          @ObjectModel.text.element: ['MDChgProcReplicationStatusText']
+          _Product.MDChgProcessReplicationStatus,
+          @Semantics.text: true
+          _Product._ReplicationStatusText.MDChangeProcKPIValueKeyDesc         as MDChgProcReplicationStatusText,
+          /* Record IDentification Line */
+          _Product.Product,
+          /* Associations */
+          _Product : redirected to parent C_ProductProcTP,
+          _RecordMessages,
+          _Changes
+}
+```
+### <a id="ProcessBO-CV-nodeextension-inactive-cdsrole"></a>CDS role for Inactive data consumption view
+```abap
+@EndUserText.label: 'Acc cntrl:ZC_PRODUCTEQUIPMENTDATAPROC_TP'
+@MappingRole: true
+define role ZC_PRODUCTEQUIPMENTDATAPROC_TP {
+  grant
+    select
+      on
+        ZC_PRODUCTEQUIPMENTDATAPROC_TP
+          where
+            inheriting conditions from entity ZI_PRODUCTEQUIPMENTDATAPROC_TP;
+            
+}
+```

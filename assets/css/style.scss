@@ -13,7 +13,9 @@
 a.btn,
 .page-header .btn,
 .page-header a[href*="github.com"],
-.header-nav-link {
+.header-nav-link,
+.project-tagline
+{
   display: none !important;
 }
 

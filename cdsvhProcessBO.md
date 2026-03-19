@@ -1,7 +1,9 @@
 # CDS View Hierarchy for Product Process BO
+
 > ⚠️ **Important:** All the Source code is for Illustration purpose only
-<a id="basic-interface-view"></a>
-## Basic Interface View
+> <a id="basic-interface-view"></a> 
+### Basic Interface View
+
 ```abap
 @AbapCatalog.viewEnhancementCategory: [#NONE]
 @AccessControl.authorizationCheck: #MANDATORY
@@ -37,7 +39,9 @@ define view entity ZI_ProductEquipmentAddnlProc
       _Product
 }
 ```
+
 ### <a id="ProcessBO-BIF-DCL"></a>Basic Interface View DCL
+
 ```abap
 @EndUserText.label: 'Access for ZI_ProductEquipmentProcChange'
 @MappingRole: true
@@ -47,11 +51,13 @@ define role ZI_PRODUCTEQUIPMENTPROCCHANGE {
       on
         ZI_ProductEquipmentProcChange
           where
-            inheriting conditions from entity ZI_ProductEquipmentAddnlProc replacing { root with   _ProductEquipmentData };  
-            
+            inheriting conditions from entity ZI_ProductEquipmentAddnlProc replacing { root with   _ProductEquipmentData };
+
 }
 ```
+
 ### <a id="ProcessBO-BIF-MODVIEW"></a>Basic Interface View for Modification table
+
 ```abap
 @AbapCatalog.viewEnhancementCategory: [#NONE]
 @AccessControl.authorizationCheck: #NOT_REQUIRED
@@ -68,7 +74,9 @@ define view entity ZI_PRODUCTEQUIPMENTPROCMODIF
    field_name      as MDChgProcessModifiedFieldName
 }
 ```
+
 ### <a id="ProcessBO-CV-MODVIEW"></a>Composite view for the Modification view
+
 ```abap
 @AbapCatalog.viewEnhancementCategory: [#NONE]
 @AccessControl.authorizationCheck: #MANDATORY
@@ -149,7 +157,9 @@ association of exact one to one ZI_EquipmentView                   as _Equipment
 }
 
 ```
+
 ### <a id="ProcessBO-TP-nodeextension"></a>Transactional Processing view for the inactive data
+
 ```abap
 @AccessControl.authorizationCheck: #MANDATORY
 @EndUserText.label: 'TP View : Materal Equipment Data'
@@ -193,7 +203,9 @@ define view entity ZI_ProductEquipmentDataProc_TP
       _EquipmentText
 }
 ```
+
 ### <a id="ProcessBO-TP-nodeextension-role"></a>CDS role for Transactional Processing view for the inactive data
+
 ```abap
 @EndUserText.label: 'Access Control for TP VIew'
 @MappingRole: true
@@ -204,6 +216,6 @@ define role ZI_PRODUCTEQUIPMENTDATAPROC_TP {
         ZI_PRODUCTEQUIPMENTDATAPROC_TP
           where
             inheriting conditions from entity ZI_ProductEquipmentAddnlProc;
-            
+
 }
 ```

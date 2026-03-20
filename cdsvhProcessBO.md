@@ -1,4 +1,4 @@
-# CDS View Hierarchy for Product Process BO
+# CDS View Stack for Product Process BO
 
 > ⚠️ **Important:** All the Source code is for Illustration purpose only
 > <a id="basic-interface-view"></a> 

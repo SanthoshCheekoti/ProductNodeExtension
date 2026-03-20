@@ -59,3 +59,16 @@ association of exact one to exact one I_ProductGov as _Product on  $projection.M
       _Product
 }
 ```
+### <a id="govbo-intf-compView-CDSRole"></a> CDS Role
+```abap
+@EndUserText.label: 'AC for ZI_PRODUCTEQUIPMENTADDNLGOV'
+@MappingRole: true
+define role ZI_PRODUCTEQUIPMENTADDNLGOV {
+  grant
+    select
+      on
+        ZI_PRODUCTEQUIPMENTADDNLGOV
+          where
+           inheriting conditions from entity I_ProductGov replacing { root with _Product };
+}
+```

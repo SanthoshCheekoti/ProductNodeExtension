@@ -47,3 +47,20 @@ authorization dependent
   static action ( authorization : global ) SaveMassEditProdEquipmentData parameter D_MDChangeProcessSaveMassEditP result [1] D_MDChangeProcessSaveMassEditR;
 }
 ```
+## <a id="bdefExtnd-Process-BO-CV"></a> BDEF Extension for consumption view of Process BO
+```abap
+extension for projection implementation in class zbp_x_c_productproctp unique;
+
+extend behavior for Product
+{
+  use association _ProductEquipmentData;
+}
+
+define behavior for ZC_PRODUCTEQUIPMENTDATAPROC_TP alias  ProductEqipmentData
+{
+    use update;
+    use association _Product;
+
+    use action SaveMassEditProdEquipmentData;
+}
+```

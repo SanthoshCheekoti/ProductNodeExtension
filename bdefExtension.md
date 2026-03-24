@@ -64,3 +64,55 @@ define behavior for ZC_PRODUCTEQUIPMENTDATAPROC_TP alias  ProductEqipmentData
     use action SaveMassEditProdEquipmentData;
 }
 ```
+## <a id="bdefExtnd-GOV-BO-TP"></a> BDEF Extension for Transactional Processing view of Governance BO
+```abap
+extension implementation in class zbp_x_b_i_productgovtp unique;
+
+extend behavior for Product
+{
+  association _ZZPRODUCTEQUIPMENTDATA { create; with draft; }
+}
+
+define behavior for ZI_PRODUCTEQUIPMENTADDNLGOVTP alias ZZProductEquipmentData with unmanaged save
+draft table yequip_gov_dft query zr_productequipAddnlData
+late numbering
+lock dependent
+authorization dependent
+etag dependent
+{
+  field ( readonly )
+  MasterDataChangeProcess,
+  MDChgProcessStep,
+  MDChgProcessSrceObject,
+  MDChgProcessSrceSystem;
+  field ( readonly : update )
+  EquipmentNumber;
+  field ( features : instance )
+  CountryKey,
+  FiscalYearAsText,
+  MonthOfConstruction;
+  update;
+  delete;
+  field ( features : instance )
+  EquipmentNumberForEdit;
+  side effects { field EquipmentNumberForEdit affects $self; }
+  association _Product { with draft; }
+}
+```
+## <a id="bdefExtnd-GOV-BO-CV"></a> BDEF Extension for Consumption view of Governance BO
+```abap
+extension for projection implementation in class zbp_x_c_productgovtp unique;
+
+extend behavior for Product
+{
+  use association _ZZPRODUCTEQUIPMENTDATA { create; with draft; }
+}
+
+define behavior for ZC_PRODUCTEQUIPMENTADDNLGOVTP alias ZZPRODUCTEQUIPMENTDATA
+use etag
+{
+  use update;
+  use delete;
+  use association _Product { with draft; }
+}
+```

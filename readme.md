@@ -10,3 +10,4 @@ title: MDG Cloud-Ready Mode - Node Extension for Product Master
 ## [Build CDS View Extend](cdsViewExtend.md)
 ## [BDEF Extension](bdefExtension.md)
 ## [BDEF Implementation](bdefImplementation.md)
+## [MetaData Extensions](metadataextension.md)

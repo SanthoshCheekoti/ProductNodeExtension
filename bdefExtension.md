@@ -1,3 +1,8 @@
+---
+layout: default
+title: Behavior Definition Extension
+---
+
 # Behavior Definition extension for SAP delivered Original BDEF
 ## <a id="bdefExtnd-Process-BO-TP"></a> BDEF Extension for transactional processing view of Processing BO
 ```abap

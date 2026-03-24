@@ -1,3 +1,8 @@
+---
+layout: default
+title: CDS View Hierarchy for Product Governance BO
+---
+
 # CDS View Hierarchy for Product Governance BO
 ## Create Interface composite view for extension node
 ```abap

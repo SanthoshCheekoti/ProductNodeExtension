@@ -1,3 +1,8 @@
+---
+layout: default
+title: Behavior Definition Implementation
+---
+
 # Behavior Definition implementation of the Behavior extensions
 ## Behavior Implementation of node extension for I_ProductProcTP( CLass ZBP_X_I_PRODUCTPROCTP )
 ### Main Class

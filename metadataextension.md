@@ -1,3 +1,8 @@
+---
+layout: default
+title: Metadata Extensions
+---
+
 # Metadata Extensions
 ## <a id="MDE-CHG-PROCESS-BO"></a>Create Metadata extension for Change Process BO
 ```abap

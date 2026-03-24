@@ -11,3 +11,4 @@ title: MDG Cloud-Ready Mode - Node Extension for Product Master
 ## [BDEF Extension](bdefExtension.html)
 ## [BDEF Implementation](bdefImplementation.html)
 ## [MetaData Extensions](metadataextension.html)
+## [MDG Application specific classes](applnClasses.md)

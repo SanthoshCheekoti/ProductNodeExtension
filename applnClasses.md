@@ -2,7 +2,7 @@
 layout: default
 title: Inheriting standard MDG Application classes to handle integration between RAP Layer and CMP later
 ---
-## Constants/Enumeration class
+## <a id="CC-CLASS"></a>Constants/Enumeration class
 ```abap
 CLASS zcc_mdc_194 DEFINITION
   PUBLIC

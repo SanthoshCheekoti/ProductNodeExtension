@@ -7,10 +7,9 @@ title: Behavior Definition Implementation
 ## Behavior Implementation of node extension for I_ProductProcTP( CLass ZBP_X_I_PRODUCTPROCTP )
 ### Main Class
 ```abap
-CLASS ZBP_X_I_PRODUCTPROCTP DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF i_productproctp.
+CLASS zbp_x_i_productproctp DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF i_productproctp.
   PUBLIC SECTION.
-    CLASS-DATA:
-      handler     TYPE REF TO if_product_staging_handler.
+
     TYPES:
       BEGIN OF create,
         BEGIN OF entities,
@@ -56,19 +55,18 @@ CLASS ZBP_X_I_PRODUCTPROCTP DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF i_p
           reported TYPE RESPONSE FOR REPORTED LATE i_productproctp,
         END OF late,
       END OF response.
-      class-methods class_constructor.
+
   PRIVATE SECTION.
     CLASS-DATA grant_master TYPE REF TO if_mdc_grant_master_mat.
 ENDCLASS.
 
 CLASS zbp_x_i_productproctp IMPLEMENTATION.
-  METHOD class_constructor.
-    handler = NEW zcl_product_staging_handler(  ).
-  ENDMETHOD.
+
 ENDCLASS.
 ```
 ### Local Type ( Handler classes )
 ```abap
+
 CLASS lhc_producteqipmentdata DEFINITION INHERITING FROM cl_abap_behavior_handler.
   PRIVATE SECTION.
 
@@ -96,20 +94,23 @@ CLASS lhc_producteqipmentdata IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD savemasseditprodequipmentdata.
-    CAST zcl_product_staging_handler( zbp_x_i_productproctp=>handler
-          )->if_mdc_staging_handler~mass_edit(
+
+    CAST cl_product_staging_handler( bp_i_productproctp=>handler )->if_mdc_staging_handler~mass_edit(
       EXPORTING
         mass_edit                = keys
       CHANGING
         result                   = result
+        failed                   = failed-product
+        reported                 = reported-product
     ).
   ENDMETHOD.
+
 ENDCLASS.
 ```
 ## Behavior Implementation of node extension for I_ProductGovTP( CLass ZBP_X_B_I_PRODUCTGOVTP)
 ### Main Class
 ```abap
-CLASS ZBP_X_B_I_PRODUCTGOVTP DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF i_productgovtp.
+CLASS zbp_x_b_i_productgovtp DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF i_productgovtp.
   PUBLIC SECTION.
     CLASS-DATA mdc_governance TYPE REF TO if_mdc_governance.
     CLASS-DATA prod_proc_handler TYPE REF TO if_product_gov_proc_handler.
@@ -127,7 +128,7 @@ ENDCLASS.
 
 CLASS zbp_x_b_i_productgovtp IMPLEMENTATION.
   METHOD class_constructor.
-    mdc_governance = zcl_mdc_governance_prd=>get( if_mdg_otc_const=>material ).
+    mdc_governance = cl_mdc_governance_prd=>get( if_mdg_otc_const=>material ).
   ENDMETHOD.
 ENDCLASS.
 ```
@@ -137,7 +138,7 @@ CLASS lhc_equipmentaddnldata DEFINITION INHERITING FROM cl_abap_behavior_handler
   PRIVATE SECTION.
 
     METHODS get_instance_features FOR INSTANCE FEATURES
-      IMPORTING keys REQUEST requested_features FOR ZZProductEquipmentData RESULT result.
+      IMPORTING keys REQUEST requested_features FOR zzproductequipmentdata RESULT result.
 
 
 
@@ -148,7 +149,7 @@ CLASS lhc_equipmentaddnldata IMPLEMENTATION.
   METHOD get_instance_features.
     DATA mdc_feature_control TYPE zbp_x_b_i_productgovtp=>feature-productequipment-results.
 
-    FINAL(staging_handler) = CAST zcl_product_staging_handler( zcl_product_staging_handler=>get_handler( '194' ) ).
+    FINAL(staging_handler) = CAST cl_product_staging_handler( cl_product_staging_handler=>get_handler( '194' ) ).
 
 
     staging_handler->if_mdc_staging_handler~feature_control(
@@ -187,18 +188,15 @@ CLASS lsc_i_productgovtp DEFINITION INHERITING FROM cl_abap_behavior_saver.
     METHODS save_modified REDEFINITION.
 
     METHODS cleanup_finalize REDEFINITION.
-
 ENDCLASS.
 
 CLASS lsc_i_productgovtp IMPLEMENTATION.
-
   METHOD adjust_numbers.
     zbp_x_b_i_productgovtp=>mdc_governance->adjust_numbers(
       CHANGING
         mapped = mapped
     ).
   ENDMETHOD.
-
   METHOD save_modified.
     DATA key TYPE bp_i_productgovtp=>key-entity-product.
     DATA failed TYPE bp_i_productgovtp=>response-late-failed.
@@ -228,6 +226,5 @@ CLASS lsc_i_productgovtp IMPLEMENTATION.
 
   METHOD cleanup_finalize.
   ENDMETHOD.
-
 ENDCLASS.
 ```

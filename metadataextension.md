@@ -12,22 +12,20 @@ annotate view C_MDChgProcProdDetailsTP with
 {
   @UI.facet: [{
       id: '_ProductEquipmentData',
-      
+
       purpose: #STANDARD,
-      
+
       type: #LINEITEM_REFERENCE,
-      
+
       targetElement: '_ProductEquipmentData',
-      
+
       position: 110 ,
-      
-      label: 'Equipment Data',
-      
-      hidden: #(MDChgProcProdDescIsHidden)
+
+      label: 'Equipment Data'
+
   }]
-  
-  @UI.hidden: true
-  MDChgProcProdEquipIsHidden;
+
+  _ProductEquipmentData;
 }
 ```
 ## <a id="MDE-PROCESS-BO-CV"></a>Create Metadata extension for Projection view

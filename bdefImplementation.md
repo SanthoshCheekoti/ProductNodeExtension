@@ -67,39 +67,8 @@ CLASS zbp_x_i_productproctp IMPLEMENTATION.
   ENDMETHOD.
 ENDCLASS.
 ```
-### Local Type ( Handler classes and saver class)
+### Local Type ( Handler classes )
 ```abap
-CLASS lsc_zx_i_productproctp DEFINITION INHERITING FROM cl_abap_behavior_saver.
-
-  PROTECTED SECTION.
-
-    METHODS save_modified REDEFINITION.
-
-ENDCLASS.
-
-CLASS lsc_zx_i_productproctp IMPLEMENTATION.
-
-  METHOD save_modified.
-    DATA(savedcreate) = VALUE zbp_x_i_productproctp=>create-entities(
-        addnlequipment = CORRESPONDING #( create-producteqipmentdata )
-    ).
-    DATA(savedupdate) = CORRESPONDING zbp_x_i_productproctp=>update-entities( update MAPPING
-        addnlequipment = producteqipmentdata
-    ).
-    DATA(saveddelete) = CORRESPONDING zbp_x_i_productproctp=>delete-entities( delete MAPPING
-        addnlequipment = producteqipmentdata
-    ).
-    DATA(response) = CAST zcl_product_staging_handler( zbp_x_i_productproctp=>handler )->save_modified(
-                                                                                        create = savedcreate
-                                                                                        update = savedupdate
-                                                                                        delete = saveddelete
-                                                                                      ).
-    reported = response-reported.
-
-  ENDMETHOD.
-
-ENDCLASS.
-
 CLASS lhc_producteqipmentdata DEFINITION INHERITING FROM cl_abap_behavior_handler.
   PRIVATE SECTION.
 
@@ -135,7 +104,6 @@ CLASS lhc_producteqipmentdata IMPLEMENTATION.
         result                   = result
     ).
   ENDMETHOD.
-
 ENDCLASS.
 ```
 ## Behavior Implementation of node extension for I_ProductGovTP( CLass ZBP_X_B_I_PRODUCTGOVTP)

@@ -179,22 +179,13 @@ annotate entity C_ProductGovTP with
     purpose: #STANDARD,
     type: #COLLECTION,
     label: 'Equipment Additional Data',
-    targetQualifier: 'EquipmentAddnlData',
      position: 300 
   },
      
-  { 
-    id: 'EquipmentAddnlDataLineItems',
-    parentId: 'EquipmentAddnlData',
-    purpose: #STANDARD,
-    type: #COLLECTION,
-    label: 'Equipment Additional Data',
-     position: 10 
-  },
      
   { 
       id: 'EquipmentAddnlDataLineItem',
-      parentId: 'EquipmentAddnlDataLineItems',
+      parentId: 'EquipmentAddnlData',
       purpose: #STANDARD,
       type: #LINEITEM_REFERENCE,
       position: 110,

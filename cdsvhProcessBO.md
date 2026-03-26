@@ -65,7 +65,7 @@ define role ZI_PRODUCTEQUIPMENTPROCCHANGE {
 
 ```abap
 @AbapCatalog.viewEnhancementCategory: [#NONE]
-@AccessControl.authorizationCheck: #NOT_REQUIRED
+@AccessControl.authorizationCheck: #PRIVILEGED_ONLY
 @EndUserText.label: 'Product Equipment Modification data'
 @Metadata.ignorePropagatedAnnotations: true
 define view entity ZI_PRODUCTEQUIPMENTPROCMODIF

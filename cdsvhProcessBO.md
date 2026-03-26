@@ -76,8 +76,9 @@ define view entity ZI_PRODUCTEQUIPMENTPROCMODIF
   key source_system   as MDChgProcessSrceSystem,
   key source_id       as MDChgProcessSrceObject,
   key yyequnr         as EquipmentNumber,
-   field_name      as MDChgProcessModifiedFieldName
+  key field_name      as MDChgProcessModifiedFieldName
 }
+
 ```
 
 ### <a id="ProcessBO-CV-MODVIEW"></a>Composite view for the Modification view

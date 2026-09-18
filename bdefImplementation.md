@@ -4,8 +4,11 @@ title: Behavior Definition Implementation
 ---
 
 # Behavior Definition implementation of the Behavior extensions
+
 ## Behavior Implementation of node extension for I_ProductProcTP( CLass ZBP_X_I_PRODUCTPROCTP )
+
 ### Main Class
+
 ```abap
 CLASS zbp_x_i_productproctp DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF i_productproctp.
   PUBLIC SECTION.
@@ -64,7 +67,9 @@ CLASS zbp_x_i_productproctp IMPLEMENTATION.
 
 ENDCLASS.
 ```
+
 ### Local Type ( Handler classes )
+
 ```abap
 
 CLASS lhc_producteqipmentdata DEFINITION INHERITING FROM cl_abap_behavior_handler.
@@ -107,8 +112,11 @@ CLASS lhc_producteqipmentdata IMPLEMENTATION.
 
 ENDCLASS.
 ```
+
 ## Behavior Implementation of node extension for I_ProductGovTP( CLass ZBP_X_B_I_PRODUCTGOVTP)
+
 ### Main Class
+
 ```abap
 CLASS zbp_x_b_i_productgovtp DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF i_productgovtp.
   PUBLIC SECTION.
@@ -132,7 +140,9 @@ CLASS zbp_x_b_i_productgovtp IMPLEMENTATION.
   ENDMETHOD.
 ENDCLASS.
 ```
+
 ### Local Types( Handler and saver class)
+
 ```abap
 CLASS lhc_equipmentaddnldata DEFINITION INHERITING FROM cl_abap_behavior_handler.
   PRIVATE SECTION.
@@ -192,10 +202,17 @@ ENDCLASS.
 
 CLASS lsc_i_productgovtp IMPLEMENTATION.
   METHOD adjust_numbers.
+    DATA mapped_for_relevant_entitites LIKE mapped.
+    mapped_for_relevant_entitites-zzproductequipmentdata = mapped-zzproductequipmentdata.
+
+    CHECK mapped_for_relevant_entitites IS NOT INITIAL.
+
     zbp_x_b_i_productgovtp=>mdc_governance->adjust_numbers(
       CHANGING
-        mapped = mapped
+        mapped = mapped_for_relevant_entitites
     ).
+
+    mapped-zzproductequipmentdata = mapped_for_relevant_entitites-zzproductequipmentdata.
   ENDMETHOD.
   METHOD save_modified.
     DATA key TYPE bp_i_productgovtp=>key-entity-product.
